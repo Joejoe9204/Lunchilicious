@@ -1,55 +1,50 @@
 package com.cavanaughj6.lunchilicious;
 
-import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.Locale;
+import java.util.List;
 
 
-public class MenuFragment extends RecyclerView.Adapter {
-    private Context context;
-    private ArrayList<MenuItem> menuItem;
+public class MenuFragment extends Fragment {
+    private RecyclerView recyclerView;
+    private MenuAdapter mAdapter;
+    MenuViewModel viewModel;
+    List<MenuItem> items;
 
-    private TextView tv_menuType, tv_menuName, tv_menuPrice;
-
-    public MenuFragment(Context context, ArrayList<MenuItem> MenuItem) {
-        this.context = context;
-        this.menuItem = MenuItem;
+    public static MenuFragment newInstance() {
+        return new MenuFragment();
     }
 
-    @NonNull
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.fragment_menu, parent, false);
-        return new MyViewHolder(view);
-    }
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-    @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        tv_menuType = holder.itemView.findViewById(R.id.tv_menuType);
-        tv_menuType.setText(menuItem.get(position).getMenuType());
-        tv_menuName = holder.itemView.findViewById(R.id.tv_menuName);
-        tv_menuName.setText(menuItem.get(position).getMenuName());
-        tv_menuPrice = holder.itemView.findViewById(R.id.tv_menuPrice);
-        tv_menuPrice.setText(String.format(Locale.US, "%.2f", menuItem.get(position).getMenuPrice()));
+        viewModel = new ViewModelProvider(requireActivity()).get(MenuViewModel.class);
+
+        viewModel.getMenuItemsLiveData().observe(this, new Observer<List<MenuItem>>() {
+            @Override
+            public void onChanged(List<MenuItem> menuItems) {
+                mAdapter.setMenuItems(menuItems);
+                items = menuItems;
+            }
+        });
     }
 
     @Override
-    public int getItemCount() {return menuItem.size(); }
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-    private class MyViewHolder extends RecyclerView.ViewHolder {
-        MyViewHolder(View view) { super(view); }
+        View view = inflater.inflate(R.layout.fragment_menu, container, false);
+        recyclerView = view.findViewById(R.id.myrecycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        mAdapter = new MenuAdapter(getContext(), items);
+        recyclerView.setAdapter(mAdapter);
+
+        return view;
     }
-
-
 }

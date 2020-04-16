@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    tools:context=".MenuFragment">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_menuName"
@@ -13,17 +11,17 @@
         android:text="Name" />
 
     <TextView
-        android:id="@+id/tv_menuType"
+        android:id="@+id/tv_menuPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Type" />
+        android:text="Price" />
 
     <TextView
-        android:id="@+id/tv_menuPrice"
+        android:id="@+id/tv_menuType"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="36dp"
         android:layout_weight="1"
-        android:text="Price" />
+        android:text="Type" />
 
 </LinearLayout>

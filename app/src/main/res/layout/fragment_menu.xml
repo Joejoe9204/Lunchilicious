@@ -2,35 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MenuFragment">
 
-    <TextView
-        android:id="@+id/tv_menuName"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/myrecycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Name" />
+        android:layout_height="match_parent" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tv_menuType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:text="Type" />
-
-        <TextView
-            android:id="@+id/tv_menuPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Price" />
-    </LinearLayout>
 </LinearLayout>
