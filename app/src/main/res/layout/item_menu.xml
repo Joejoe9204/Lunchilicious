@@ -1,34 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="80dp">
 
-    <TextView
-        android:id="@+id/tv_menuName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Name" />
+    <ImageView
+        android:id="@+id/iv_foodic"
+        android:layout_width="78dp"
+        android:layout_height="72dp"
+        app:srcCompat="@drawable/ic_food" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_width="wrap_content"
+        android:layout_height="61dp"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tv_menuType"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:text="Type" />
+            android:id="@+id/tv_menuName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:text="Name" />
 
-        <TextView
-            android:id="@+id/tv_menuPrice"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:layout_weight="1"
-            android:text="Price" />
+            android:layout_height="59dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_menuType"
+                android:layout_width="224dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:gravity="right|left"
+                android:text="Type" />
+
+            <TextView
+                android:id="@+id/tv_menuPrice"
+                android:layout_width="399dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Price" />
+
+        </LinearLayout>
+
     </LinearLayout>
+
 </LinearLayout>

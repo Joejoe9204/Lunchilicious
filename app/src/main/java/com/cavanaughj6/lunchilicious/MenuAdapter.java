@@ -31,7 +31,7 @@ public class MenuAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         TextView tv_menuType = holder.itemView.findViewById(R.id.tv_menuType);
-        tv_menuType.setText(itemList.get(position).MenuType);
+        tv_menuType.setText(itemList.get(position).getMenuType());
         TextView tv_menuName = holder.itemView.findViewById(R.id.tv_menuName);
         tv_menuName.setText(itemList.get(position).getMenuName());
         TextView tv_menuPrice = holder.itemView.findViewById(R.id.tv_menuPrice);
@@ -49,5 +49,4 @@ public class MenuAdapter extends RecyclerView.Adapter {
         this.itemList = items;
         notifyDataSetChanged();
     }
-
 }
