@@ -1,30 +1,32 @@
 package com.cavanaughj6.lunchilicious;
 
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
-import java.util.ArrayList;
+import android.content.Context;
+import android.app.Application;
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import java.util.List;
 
-public class MenuViewModel extends ViewModel {
+public class MenuViewModel extends AndroidViewModel {
+    LiveData<List<MenuItem>> itemsLiveData = null;
 
-    MutableLiveData<List<MenuItem>> itemsLiveData = new MutableLiveData<>();
-    public List<MenuItem> items = new ArrayList<>();
+    public MenuViewModel(@NonNull Application application) {super(application);}
 
-    public MutableLiveData<List<MenuItem>> getMenuItemsLiveData() {
+    public LiveData<List<MenuItem>> getMenuItemsLiveData() {
+        if (itemsLiveData == null) {
+            Context context = getApplication().getApplicationContext();
+            itemsLiveData = LunchiliciousDatabase.getDatabase(context).menuItemDao().getAllMenuItems();
+        }
         return itemsLiveData;
     }
 
-    public void setItems(List<MenuItem> items) {
-        if (itemsLiveData == null) {
-            itemsLiveData = new MutableLiveData<>(items);
-        }
-        this.items = items;
-        itemsLiveData.setValue(items);
-    }
-
-    public void addMenuItem(MenuItem menuItem) {
-        items.add(menuItem);
-        itemsLiveData.setValue(items);
+    public void addNewMenuItem(MenuItem menuItem) {
+        LunchiliciousDatabase.databaseWriteExecutor.execute(() -> {
+            Context context = getApplication().getApplicationContext();
+            int maxMenuId = LunchiliciousDatabase.getDatabase(context).menuItemDao().findMaxMenuId();
+            menuItem.MenuId = maxMenuId + 1;
+            LunchiliciousDatabase.getDatabase(context).menuItemDao().insertItem(menuItem);
+        });
     }
 }
 
