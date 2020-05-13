@@ -3,7 +3,6 @@ package com.cavanaughj6.lunchilicious;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 

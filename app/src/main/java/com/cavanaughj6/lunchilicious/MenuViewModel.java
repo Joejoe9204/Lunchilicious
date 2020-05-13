@@ -9,8 +9,13 @@ import java.util.List;
 
 public class MenuViewModel extends AndroidViewModel {
     LiveData<List<MenuItem>> itemsLiveData = null;
+    private LunchiliciousRepository lunchiliciousRepository;
 
-    public MenuViewModel(@NonNull Application application) {super(application);}
+    public MenuViewModel(@NonNull Application application) {
+        super(application);
+        lunchiliciousRepository = new LunchiliciousRepository(application);
+        itemsLiveData = lunchiliciousRepository.getMenuItems();
+    }
 
     public LiveData<List<MenuItem>> getMenuItemsLiveData() {
         if (itemsLiveData == null) {
@@ -21,12 +26,17 @@ public class MenuViewModel extends AndroidViewModel {
     }
 
     public void addNewMenuItem(MenuItem menuItem) {
-        LunchiliciousDatabase.databaseWriteExecutor.execute(() -> {
-            Context context = getApplication().getApplicationContext();
-            int maxMenuId = LunchiliciousDatabase.getDatabase(context).menuItemDao().findMaxMenuId();
-            menuItem.MenuId = maxMenuId + 1;
-            LunchiliciousDatabase.getDatabase(context).menuItemDao().insertItem(menuItem);
-        });
+        if(lunchiliciousRepository == null){
+            lunchiliciousRepository = new LunchiliciousRepository(getApplication());
+        }
+
+            int maxMenuId = -1;
+            menuItem.MenuId = maxMenuId;
+            lunchiliciousRepository.addMenuItem(menuItem);
+    }
+
+    public void updateMenuItems() {
+        lunchiliciousRepository.updateMenuItems();
     }
 }
 

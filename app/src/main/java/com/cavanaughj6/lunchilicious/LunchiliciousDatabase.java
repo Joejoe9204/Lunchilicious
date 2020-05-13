@@ -27,14 +27,14 @@ public abstract class LunchiliciousDatabase extends RoomDatabase {
                 INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                         LunchiliciousDatabase.class, "menu_item_database")
                         .fallbackToDestructiveMigration()
-                        .addCallback(lunchiliciousDBCallback)
+                        .addCallback(LunchiliciousDBCallback)
                         .build();
             }
         }
         return INSTANCE;
     }
 
-    private static RoomDatabase.Callback lunchiliciousDBCallback = new RoomDatabase.Callback() {
+    private static RoomDatabase.Callback LunchiliciousDBCallback = new RoomDatabase.Callback() {
         @Override
         public void onOpen(@NonNull SupportSQLiteDatabase db) {
             super.onOpen(db);

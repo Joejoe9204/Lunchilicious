@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 import java.util.List;
 
@@ -20,14 +20,14 @@ public class MenuFragment extends Fragment {
     private RecyclerView recyclerView;
     private MenuAdapter mAdapter;
     MenuViewModel viewModel;
-    List<MenuItem> item;
+    List<MenuItem> itemList;
 
     boolean numeric;
     double menuPrice;
 
-    TextView tv_bInfo;
     EditText et_MenuName, et_MenuType, et_MenuPrice;
     String msgMenuName, msgMenuPrice, msgMenuType;
+    Button b_update;
     ImageButton imgb_add;
 
     public static MenuFragment newInstance() {
@@ -65,8 +65,6 @@ public class MenuFragment extends Fragment {
         et_MenuName = view.findViewById(R.id.et_MenuName);
         et_MenuPrice = view.findViewById(R.id.et_MenuPrice);
         et_MenuType = view.findViewById(R.id.et_MenuType);
-        tv_bInfo = view.findViewById(R.id.tv_bInfo);
-        tv_bInfo.setText("Insert Name, Type, and Price");
 
         imgb_add = view.findViewById(R.id.imgb_add);
         imgb_add.setOnClickListener(new View.OnClickListener() {
@@ -85,13 +83,23 @@ public class MenuFragment extends Fragment {
 
                 if (numeric && msgMenuName != "" && msgMenuType != "") {
                     viewModel = new ViewModelProvider(getActivity()).get(MenuViewModel.class);
-                    final MenuItem newItem = new MenuItem(-1 , msgMenuType, msgMenuName, "", menuPrice);
-                    viewModel.addNewMenuItem(newItem);
+                    final MenuItem menuItem = new MenuItem(-1 , msgMenuType, msgMenuName, "", menuPrice);
+                    viewModel.addNewMenuItem(menuItem);
                 } else {
                     Toast.makeText(getContext(), "Input is Invalid", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+        b_update = view.findViewById(R.id.b_update);
+        b_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateButton();
+            }
+        });
+
+
         return view;
     }
 
@@ -99,15 +107,19 @@ public class MenuFragment extends Fragment {
 
     public void displayMenuItems(View v) {
         viewModel = new ViewModelProvider(requireActivity()).get(MenuViewModel.class);
-        mAdapter = new MenuAdapter(getContext(), item);
+        mAdapter = new MenuAdapter(getContext(), itemList);
         recyclerView.setAdapter(mAdapter);
         viewModel.getMenuItemsLiveData().observe(getViewLifecycleOwner(), new Observer<List<MenuItem>>() {
             @Override
             public void onChanged(List<MenuItem> menuItems) {
                 mAdapter.setMenuItems(menuItems);
-                mAdapter.notifyDataSetChanged();
-                item = menuItems;
+                itemList = menuItems;
             }
         });
     }
+
+    public void updateButton() {
+        viewModel.updateMenuItems();
+    }
+
 }
