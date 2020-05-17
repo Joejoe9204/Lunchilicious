@@ -24,7 +24,7 @@ public class LunchiliciousRepository {
     MenuItemClient client;
     String POST_URL = "http://aristotle.cs.scranton.edu/";
     Application application;
-    MenuAdapter mAdapter;
+
 
 
 
@@ -44,7 +44,7 @@ public class LunchiliciousRepository {
         client = retrofit.create(MenuItemClient.class);
     }
 
-    public LiveData<List<MenuItem>> getMenuItems() { return itemsLiveData; }
+    public LiveData<List<MenuItem>> getMenuItemsRepo() { return itemsLiveData; }
 
 
     public void addMenuItem(MenuItem menuItem) {
@@ -71,13 +71,16 @@ public class LunchiliciousRepository {
             public void onResponse(Call<List<MenuItem>> call, Response<List<MenuItem>> response) {
                 LunchiliciousDatabase.databaseWriteExecutor.execute(() -> {
                     List<MenuItem> itemList = response.body();
-                    int maxLocalId = menuItemDao.findMaxMenuId();
-                    for (int i = maxLocalId + 1; i <= itemList.get(i).MenuId ; i++){
-                        menuItemDao.insertItem(itemList.get(i));
-                        Toast.makeText(application, "PASSED", Toast.LENGTH_SHORT).show();
+                    int maxID = menuItemDao.findMaxMenuId();
+                    for (int i = 0; i < itemList.size() ; i++) {
+                        if (itemList.get(i).id > maxID) {
+                            menuItemDao.insertItem(itemList.get(i));
+                        }
                     }
                 });
+                Toast.makeText(application, "PASSED", Toast.LENGTH_SHORT).show();
             }
+
             @Override
             public void onFailure(Call<List<MenuItem>> call, Throwable t) {
                 Toast.makeText(application, "FAILED", Toast.LENGTH_SHORT).show();

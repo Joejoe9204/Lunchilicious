@@ -6,23 +6,23 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "item")
 public class MenuItem {
     @PrimaryKey
-     int MenuId;
-     String MenuType;
-     String MenuName;
-     String MenuDescription;
-     double price;
-    public MenuItem(int MenuId, String MenuType, String MenuName, String MenuDescription, double price) {
-        this.MenuId = MenuId;
-        this.MenuType = MenuType;
-        this.MenuName = MenuName;
-        this.MenuDescription = MenuDescription;
-        this.price = price;
+     int id;
+     String type;
+     String name;
+     String description;
+     double unitPrice;
+    public MenuItem(int id, String type, String name, String description, double unitPrice) {
+        this.id = id;
+        this.type = type;
+        this.name = name;
+        this.description = description;
+        this.unitPrice = unitPrice;
     }
 
-    public int getMenuId() {return MenuId;}
-    public String getMenuType() {return MenuType;}
-    public String getMenuName() {return MenuName;}
-    public String getMenuDescription() {return  MenuDescription;}
-    public double getMenuPrice() {return price;}
+    public int getMenuId() {return id;}
+    public String getMenuType() {return type;}
+    public String getMenuName() {return name;}
+    public String getMenuDescription() {return description;}
+    public double getMenuPrice() {return unitPrice;}
 
 }

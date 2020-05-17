@@ -20,11 +20,11 @@ public interface MenuItemDao {
 
     @Query("SELECT * " +
             "FROM item " +
-            "ORDER BY MenuType, MenuName")
+            "ORDER BY type, name")
     LiveData<List<MenuItem>> getAllMenuItems();
 
 
-    @Query("SELECT max(MenuId) FROM item")
+    @Query("SELECT max(id) FROM item")
     int findMaxMenuId();
 
 }

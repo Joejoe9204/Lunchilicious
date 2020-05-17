@@ -14,7 +14,7 @@ public class MenuViewModel extends AndroidViewModel {
     public MenuViewModel(@NonNull Application application) {
         super(application);
         lunchiliciousRepository = new LunchiliciousRepository(application);
-        itemsLiveData = lunchiliciousRepository.getMenuItems();
+        itemsLiveData = lunchiliciousRepository.getMenuItemsRepo();
     }
 
     public LiveData<List<MenuItem>> getMenuItemsLiveData() {
@@ -31,7 +31,7 @@ public class MenuViewModel extends AndroidViewModel {
         }
 
             int maxMenuId = -1;
-            menuItem.MenuId = maxMenuId;
+            menuItem.id = maxMenuId;
             lunchiliciousRepository.addMenuItem(menuItem);
     }
 
