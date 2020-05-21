@@ -34,10 +34,6 @@ public class MenuViewModel extends AndroidViewModel {
             menuItem.id = maxMenuId;
             lunchiliciousRepository.addMenuItem(menuItem);
     }
-
-    public void updateMenuItems() {
-        lunchiliciousRepository.updateMenuItems();
-    }
 }
 
 

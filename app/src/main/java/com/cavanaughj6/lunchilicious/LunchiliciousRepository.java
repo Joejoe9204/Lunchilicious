@@ -63,30 +63,6 @@ public class LunchiliciousRepository {
             }
         });
     }
-
-    public void updateMenuItems(){
-        Call<List<MenuItem>> call = client.getAllMenuItems();
-        call.enqueue(new Callback<List<MenuItem>>() {
-            @Override
-            public void onResponse(Call<List<MenuItem>> call, Response<List<MenuItem>> response) {
-                LunchiliciousDatabase.databaseWriteExecutor.execute(() -> {
-                    List<MenuItem> itemList = response.body();
-                    int maxID = menuItemDao.findMaxMenuId();
-                    for (int i = 0; i < itemList.size() ; i++) {
-                        if (itemList.get(i).id > maxID) {
-                            menuItemDao.insertItem(itemList.get(i));
-                        }
-                    }
-                });
-                Toast.makeText(application, "PASSED", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(Call<List<MenuItem>> call, Throwable t) {
-                Toast.makeText(application, "FAILED", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 }
 
 

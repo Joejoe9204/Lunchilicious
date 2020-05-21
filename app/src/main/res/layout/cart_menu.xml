@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="94dp">
+
+        <ImageView
+            android:id="@+id/iv_foodic"
+            android:layout_width="54dp"
+            android:layout_height="55dp"
+            app:srcCompat="@drawable/ic_food" />
+
+        <LinearLayout
+            android:layout_width="141dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_addToName"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="Name" />
+
+            <TextView
+                android:id="@+id/tv_addToType"
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:layout_weight="1"
+                android:text="Type" />
+
+            <TextView
+                android:id="@+id/tv_addToPrice"
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:layout_weight="1"
+                android:text="Price" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_quantity"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:text="Quantity" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

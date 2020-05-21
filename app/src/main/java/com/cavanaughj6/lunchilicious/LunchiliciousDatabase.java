@@ -11,9 +11,11 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {MenuItem.class}, version = 5, exportSchema = false)
+@Database(entities = {MenuItem.class, CartItem.class, OrderModel.class}, version = 5, exportSchema = false)
 public abstract class LunchiliciousDatabase extends RoomDatabase {
     public abstract MenuItemDao menuItemDao();
+    public abstract CartItemDao cartItemDao();
+    public abstract OrderModelDao orderModelDao();
 
     private static volatile LunchiliciousDatabase INSTANCE;
     private static final int NUM_THREADS = 2;
@@ -41,10 +43,17 @@ public abstract class LunchiliciousDatabase extends RoomDatabase {
 
             databaseWriteExecutor.execute( () -> {
                 MenuItemDao menuItemDao = INSTANCE.menuItemDao();
+                CartItemDao cartItemDao = INSTANCE.cartItemDao();
+                OrderModelDao orderModelDao = INSTANCE.orderModelDao();
+
                 menuItemDao.deleteAllItems();
+                cartItemDao.deleteAllItems();
+                orderModelDao.deleteAllItems();
+
                 ArrayList<MenuItem> menuItems = createMenuItems();
                 menuItemDao.insertListMenuItems(menuItems);
-            });
+
+                });
         }
     };
 

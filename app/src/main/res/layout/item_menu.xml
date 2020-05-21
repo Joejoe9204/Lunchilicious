@@ -29,7 +29,7 @@
 
             <TextView
                 android:id="@+id/tv_menuType"
-                android:layout_width="224dp"
+                android:layout_width="116dp"
                 android:layout_height="56dp"
                 android:layout_weight="1"
                 android:gravity="right|left"
@@ -37,7 +37,7 @@
 
             <TextView
                 android:id="@+id/tv_menuPrice"
-                android:layout_width="399dp"
+                android:layout_width="121dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Price" />

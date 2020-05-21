@@ -17,20 +17,20 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tv_menuName"
+            android:id="@+id/tv_addToName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Name" />
 
         <TextView
-            android:id="@+id/tv_menuType"
+            android:id="@+id/tv_addToType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Type" />
 
         <TextView
-            android:id="@+id/tv_menuPrice"
+            android:id="@+id/tv_addToPrice"
             android:layout_width="match_parent"
             android:layout_height="39dp"
             android:layout_weight="1"
